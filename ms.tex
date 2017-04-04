@@ -1,0 +1,118 @@
+%# -*- coding:utf-8 -*-
+%Author: Silver
+%Github上源码（不定期无负责更新）：https://github.com/silverriver/tex4cugb
+%如果有任何bug欢迎新的PR或联系zhengyinhe1@163.com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%AutoFakeBold和AutoFakeSlant是xeCJK宏包中的选项，开启伪粗体和伪斜体
+%行距被设定为linespread=1.65。虽然这比学校要求（1.5倍行距）要宽，但是这是最接近word中1.5倍行距的效果
+\documentclass[a4paper,UTF8,twoside,zihao=-4,no-math,linespread=1.65,AutoFakeBold=1.8,AutoFakeSlant=true]{ctexrep}
+\normalsize								%字号(因为在文档类选项里面指定了zihao=-4，所以默认4号字)
+\setlength{\parskip}{0ex plus 0.5ex}	%段落间的间距
+
+%---------加载宏包----------
+\usepackage{fontspec}					%设置英文字体
+\setmainfont{Times New Roman}
+
+\usepackage{amsmath}			%数学公式
+\usepackage{amssymb}			%数学符号
+\usepackage{amsthm}				%数学定理
+\usepackage[top=3.3cm,bottom=3.3cm,left=3.17cm,right=3.17cm,headsep=0.7cm,headheight=0.5cm,footskip=1.25cm]{geometry}		%页边距
+\usepackage{graphicx}	%图
+\usepackage{booktabs}	%三线表
+\usepackage{multirow}	%做表格要用到宏包
+\usepackage{hyperref}	%链接宏包
+
+\usepackage[style=base,justification=centering,font=small]{caption}	%更改标题要用到的宏包
+\DeclareCaptionLabelSeparator{nocolon}{~}							%图编号与标题之间不带冒号
+\captionsetup{labelsep=nocolon}										%图编号与标题之间不带冒号：
+\renewcommand{\thefigure}{\thechapter-\arabic{figure}}				%设置图标题的连接符是-
+\renewcommand{\thetable}{\thechapter-\arabic{table}}				%设置表标题的连接符是-
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}			%设置公式编号的连接符是-
+
+\usepackage{fancyhdr}										%设置页眉页脚
+\fancyhead[L]{}
+\fancyhead[R]{}
+\fancyhead[CE]{\small 中国地质大学（北京）博士学位论文}		%偶数页页眉
+\fancyhead[CO]{\small \leftmark}							%奇数页页眉
+\fancyfoot[C]{\thepage}										%页码
+
+%---------设置各种间距-----------
+\setlength{\intextsep} {3.5ex plus 0.2ex minus 0.2ex}			%浮动体与文字之间的距离
+\setlength{\textfloatsep} {3.5ex plus 0.2ex minus 0.2ex}		%浮动体与页面顶部或者底部的距离
+\setlength{\floatsep} {3ex}										%两个浮动体之间的距离
+\setlength{\abovecaptionskip} {1ex plus 0.2ex minus 0.2ex }		%浮动体与标题之间的距离
+\setlength{\belowcaptionskip} {-1.0ex plus 0.1ex minus 0.1ex}
+
+%---------设置章节标题格式----------
+\ctexset{chapter={
+	number=\arabic{chapter},
+	format=\heiti\zihao{2}\centering,			%2号黑体
+	beforeskip=3ex plus 0.3ex minus 0.3ex,		%与正文内容的间距
+	afterskip=3ex plus 0.3ex minus 0.3ex,
+	fixskip=true,
+	},
+  section={
+	format=\heiti\zihao{3}\centering,			%3号黑体
+	beforeskip=2ex plus 0.1ex minus 0.1ex,		%与正文内容的间距
+	afterskip=2ex plus 0.1ex minus 0.1ex,
+	},
+  subsection={
+	format=\heiti\zihao{4},						%4号黑体
+	beforeskip=1ex plus 0.1ex minus 0.1ex,	%与正文内容的间距
+	afterskip=1ex plus 0.1ex minus 0.1ex,
+	},
+}
+
+%-----------图的路径和大小，方便修改--------
+\newcommand{\figpath}{../图}
+\newcommand{\figwidth}{13cm}
+
+%----------文档信息-------------
+\newcommand\timu{标题}
+\newcommand\zuozhe{作者}
+\newcommand\xuehao{学号}
+\newcommand\daoshi{导师}
+\newcommand\daoshizhicheng{教授}
+\newcommand\zhuanye{专业}
+\newcommand\fangxiang{方向}
+\newcommand\riqi{时间}
+
+\newcommand\yingwentimu{Title}
+\newcommand\yingwenzuozhe{Author}
+\newcommand\yingwenzhuanye{Major}
+\newcommand\yingwenfangxiang{Research area}
+\newcommand\yingwendaoshi{Advisor}
+\newcommand\yingwenzhicheng{Prof.}
+
+%----------开始正文----------------
+\begin{document}
+\songti			%设定字体
+\abovedisplayskip 2ex			%设置公式与正文的间隔
+\belowdisplayskip 2ex
+\abovedisplayshortskip 2ex
+\belowdisplayshortskip 2ex
+
+\include{chapters/title}		%封面(送盲审的时候不能透露姓名，可以用title_anonymous生成不带姓名信息的封面)
+\include{chapters/confidential}		%保密声明
+
+\pagenumbering{roman}				%设置页码格式为罗马数字
+\pagestyle{plain}					%不要页眉
+\include{chapters/abstract}			%摘
+\tableofcontents					%目录
+
+\cleardoublepage					%另起一页
+\pagenumbering{arabic}				%设置页码格式为阿拉伯数字
+\pagestyle{fancy}					%设定页眉
+\include{chapters/chapter1}			%第1章
+%\include{chapters/chapter2}			%第2章
+%\include{chapters/chapter3}			%第3章
+%\include{chapters/chapter4}			%第4章
+%\include{chapters/chapter5}			%第5章
+%\include{chapters/chapter6}
+\include{chapters/bib}				%手动添加参考文献，因为没有找到合适的.bst文件。如果有更好的办法欢迎补充
+
+\appendix							%开始附录
+\include{chapters/appendixA}		%附录A
+\include{chapters/CV}				%简历
+\end{document}

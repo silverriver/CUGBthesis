@@ -1,0 +1,28 @@
+%# -*- coding:utf-8 -*-
+%Author: Silver
+%Github上源码（不定期无负责更新）：https://github.com/silverriver/tex4cugb
+%如果有任何bug欢迎新的PR或联系zhengyinhe1@163.com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{
+%摘要用section实现，所以需要临时修改一下section的标题格式
+\ctexset{section={
+	format=\heiti\zihao{-3}\centering,		%3号黑体
+	beforeskip=0ex,							%与正文内容的间距
+	afterskip=1ex,
+	},
+}
+\section*{\zihao{-3}摘~要}
+
+我是摘要
+
+\noindent 关键词：我是关键词
+
+\clearpage
+
+\section*{\zihao{-3}Abstract}
+
+I am the abstract
+
+\noindent Key words: I am the key words
+}
